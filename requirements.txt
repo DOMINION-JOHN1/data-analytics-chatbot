@@ -12,3 +12,6 @@ langchain_experimental
 tabulate
 matplotlib
 seaborn
+PIL
+io
+base64
