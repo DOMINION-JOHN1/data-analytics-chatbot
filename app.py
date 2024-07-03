@@ -35,13 +35,31 @@ if uploaded_file is not None:
     # Create the agent
     agent = create_pandas_dataframe_agent(llm=model, df=df, verbose=False, allow_dangerous_code=True, handle_parsing_errors=True)
 
-    # Add a text input for user queries
-    user_query = st.text_input("Ask a question about your data:")
-    
-    if user_query: 
+   if user_query: 
         # Invoke the agent with the human message and display the output
         response = agent.invoke(user_query)
         st.write("Agent Output:")
         st.write(response)
+
+        # Check if the response contains a chart
+        if hasattr(response, 'chart') and response.chart is not None:
+            st.pyplot(response.chart)
+        elif isinstance(response, dict) and 'plot' in response:
+            # Assume the response contains plotting instructions
+            plot_data = response['plot']
+            fig, ax = plt.subplots(figsize=(10, 5))
+
+            # Example: check plot type and render accordingly
+            if plot_data['type'] == 'line':
+                sns.lineplot(data=plot_data['data'], x=plot_data['x'], y=plot_data['y'], ax=ax)
+            elif plot_data['type'] == 'bar':
+                sns.barplot(data=plot_data['data'], x=plot_data['x'], y=plot_data['y'], ax=ax)
+            elif plot_data['type'] == 'scatter':
+                sns.scatterplot(data=plot_data['data'], x=plot_data['x'], y=plot_data['y'], ax=ax)
+            elif plot_data['type'] == 'hist':
+                sns.histplot(data=plot_data['data'], x=plot_data['x'], kde=True, ax=ax)
+
+            plt.title(plot_data.get('title', 'Plot'))
+            st.pyplot(fig)
 else:
     st.write("Please upload a CSV file to proceed.")
