@@ -35,7 +35,7 @@ if uploaded_file is not None:
     # Create the agent
     agent = create_pandas_dataframe_agent(llm=model, df=df, verbose=False, allow_dangerous_code=True, handle_parsing_errors=True)
 
-   if user_query: 
+    if user_query: 
         # Invoke the agent with the human message and display the output
         response = agent.invoke(user_query)
         st.write("Agent Output:")
