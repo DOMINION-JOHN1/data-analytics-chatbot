@@ -15,8 +15,14 @@ import base64
 os.environ["AZURE_OPENAIAPI_KEY"] = st.secrets["AZURE_OPENAI_KEY"]
 
 # Streamlit app
-st.title("Data Analytics Buddy 📊")
+st.title("Data Analytics Buddy :reminder_ribbon:")
+# Catchy description
+st.markdown("""
+**Welcome to Data Analytics Buddy! 📊**
 
+**Your Intelligent Data Companion:**
+Upload your CSV files, ask insightful questions, and get instant answers. Whether it's generating interactive visualizations, performing data analysis, or simply making sense of your data, our AI-powered chatbot is here to assist. Transform your raw data into meaningful insights effortlessly. Let Data Analytics Buddy take your data exploration to the next level!
+""")
 # File uploader for CSV file
 uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
 
