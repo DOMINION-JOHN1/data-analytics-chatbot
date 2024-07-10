@@ -16,7 +16,7 @@ import base64
 # Set the Azure OpenAI API key
 os.environ["AZURE_OPENAIAPI_KEY"] = st.secrets["AZURE_OPENAI_KEY"]
 
-matplotlib.use(TkAgg)
+matplotlib.use("TkAgg")
 # Streamlit app
 st.title("Data Analytics Buddy :reminder_ribbon:")
 # Catchy description
