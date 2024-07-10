@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib
 import seaborn as sns
 import os
 from langchain.schema import HumanMessage
@@ -15,8 +14,6 @@ import base64
 
 # Set the Azure OpenAI API key
 os.environ["AZURE_OPENAIAPI_KEY"] = st.secrets["AZURE_OPENAI_KEY"]
-
-matplotlib.use("TkAgg")
 # Streamlit app
 st.title("Data Analytics Buddy :reminder_ribbon:")
 # Catchy description
@@ -59,10 +56,11 @@ if uploaded_file is not None:
         st.write("Agent Output:")
         st.write(response)
 
-        # Check if the response contains a PNG image as a base64 string
-        if isinstance(response, dict) and 'image_base64' in response:
-            image_data = base64.b64decode(response['image_base64'])
-            image = Image.open(io.BytesIO(image_data))
-            st.image(image, caption="Generated Plot")
+        # Check if the response contains a matplotlib plot
+        if isinstance(response, dict) and 'plot' in response:
+            plot_data = response['plot']
+            st.pyplot(plot_data)(image_data)
+        else:
+            st.write("No plot found in the response.")
 else:
     st.write("Please upload a CSV file to proceed.")
