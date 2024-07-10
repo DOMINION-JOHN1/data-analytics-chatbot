@@ -51,20 +51,19 @@ if uploaded_file is not None:
     user_query = st.text_input("Ask a question about your data:")
     
     if user_query:
-       try:
-           # Redirect the output of plt.show() to a buffer
-           buf = io.BytesIO()
-           plt.savefig(buf, format='png')
-           buf.seek(0)
+       # Redirect the output of plt.show() to a buffer
+       buf = io.BytesIO()
+       plt.savefig(buf, format='png')
+       buf.seek(0)
 
-           # Invoke the agent with the human message and display the output
-           response = agent.invoke(user_query)
-           st.write("Agent Output:")
-           st.write(response)
+       # Invoke the agent with the human message and display the output
+       response = agent.invoke(user_query)
+       st.write("Agent Output:")
+       st.write(response)
 
-           # Display the captured plot
-           st.pyplot(buf)
+       # Display the captured plot
+       st.pyplot(buf)
 
-           buf.close()
+       buf.close()
 else:
     st.write("Please upload a CSV file to proceed.")
