@@ -46,7 +46,7 @@ if uploaded_file is not None:
     tools = load_tools(["python_repl"], llm=model)
 
     # Create the agent
-    agent = create_pandas_dataframe_agent(llm=model, df=df, tools=tools, verbose=True, allow_dangerous_code=True, handle_parsing_errors=True)
+    agent = create_pandas_dataframe_agent(llm=model, df=df, tools, verbose=True, allow_dangerous_code=True, handle_parsing_errors=True)
 
     # Add a text input for user queries
     user_query = st.text_input("Ask a question about your data:")
