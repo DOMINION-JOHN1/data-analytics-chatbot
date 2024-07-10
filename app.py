@@ -43,7 +43,7 @@ if uploaded_file is not None:
 
 
     # Load the required tools
-    tools = load_tools(["python_repl_ast"], llm=model)
+    tools = load_tools(["python_repl"], llm=model)
 
     # Create the agent
     agent = create_pandas_dataframe_agent(llm=model, df=df, tools=tools, verbose=True, allow_dangerous_code=True, handle_parsing_errors=True)
