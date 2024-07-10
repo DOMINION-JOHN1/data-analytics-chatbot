@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib
 import seaborn as sns
 import os
 from langchain.schema import HumanMessage
@@ -15,6 +16,7 @@ import base64
 # Set the Azure OpenAI API key
 os.environ["AZURE_OPENAIAPI_KEY"] = st.secrets["AZURE_OPENAI_KEY"]
 
+matplotlib.use(TkAgg)
 # Streamlit app
 st.title("Data Analytics Buddy :reminder_ribbon:")
 # Catchy description
