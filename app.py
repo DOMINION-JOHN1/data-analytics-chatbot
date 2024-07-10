@@ -5,6 +5,7 @@ import seaborn as sns
 import os
 from langchain.schema import HumanMessage
 from langchain_openai import AzureChatOpenAI
+from langchain.agents import load_tools
 from langchain.agents.agent_types import AgentType
 from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe_agent
 from PIL import Image
@@ -40,8 +41,12 @@ if uploaded_file is not None:
         api_key=os.getenv("AZURE_OPENAIAPI_KEY")
     )
 
+
+    # Load the required tools
+    tools = load_tools(["python_repl_ast"], llm=model)
+
     # Create the agent
-    agent = create_pandas_dataframe_agent(llm=model, df=df, verbose=True, allow_dangerous_code=True, handle_parsing_errors=True)
+    agent = create_pandas_dataframe_agent(llm=model, df=df, tools=tools, verbose=True, allow_dangerous_code=True, handle_parsing_errors=True)
 
     # Add a text input for user queries
     user_query = st.text_input("Ask a question about your data:")
