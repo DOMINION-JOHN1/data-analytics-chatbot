@@ -34,9 +34,9 @@ if uploaded_file is not None:
     
     # Initialize the AzureChatOpenAI client
     model = AzureChatOpenAI(
-        openai_api_version="2024-02-01",
-        azure_deployment="gpt-35-turbo-16k",
-        azure_endpoint="https://ai-explore1azureai1486566462541.openai.azure.com/",
+        openai_api_version="2024-05-01-preview",
+        azure_deployment="gpt-4o",
+        azure_endpoint="https://ai-feedback-system.openai.azure.com/"
         api_key=os.getenv("AZURE_OPENAIAPI_KEY")
     )
 
